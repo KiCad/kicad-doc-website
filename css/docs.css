@@ -1,0 +1,72 @@
+.books-list {
+    display: flex;
+    flex-flow: row wrap;
+    top: -80px;
+    max-width: 1200px;
+    margin: auto;
+	padding: 0 20px;
+	list-style-type: none;
+}
+
+.books-list li {
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0px 2px 4px 2px rgba(0,0,0,0.2);
+    margin: 10px;
+    flex: 1 0 270px;
+    min-width: 270px;
+}
+
+.books-list li a, 
+.books-list li a:visited {
+    text-decoration: none;
+}
+
+.books-list li .book-box {
+	padding: 40px;
+	display: flex;
+	flex-direction: column;
+}
+
+.books-list li .book-box img {
+    height: 96px;
+    margin: auto;
+    margin-bottom: 20px;
+    transition: 0.2s cubic-bezier(0, 0, 0, 1);
+}
+
+.books-list li .book-box .book-info {
+    transition: 0.2s cubic-bezier(0, 0, 0, 1);
+}
+
+.books-list li a h2, .books-list li a:visited h2 {
+    height: 50px;
+    margin: 10px 0 25px;
+    margin-top: 0;
+}
+.books-list li .book-box h2 {
+    border-bottom: 1px solid #e5e5e5;
+}
+.books-list li h2 {
+    text-align: center;
+    font-weight: 400;
+}
+
+
+.sidebar-outer {
+    position: relative;
+}
+
+.fixed {
+    position: fixed;
+}
+
+.navbar-form {
+    margin-top: 8px;
+}
+
+.search-input {
+    width: 250px !important;
+    height: 42px;
+}

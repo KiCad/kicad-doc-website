@@ -1,0 +1,27 @@
+<!-- Collect the nav links, forms, and other content for toggling -->
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	<form class="navbar-form navbar-left">
+		<div class="form-group aa-input-container"  id="aa-input-container">
+			<input type="text" placeholder="Search" class="form-control search-input" id="aa-search-input" name="search" autocomplete="off">
+		</div>
+	</form>
+	<ul class="nav navbar-nav navbar-left">
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Version<span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<li><a href="/">5.0</a></li>
+			</ul>
+		</li>
+	</ul>
+	<ul class="nav navbar-nav navbar-right">
+		{% for item in site.data.navigation %}
+			<li>
+				<a href="{{ item.url }}" alt="{{ item.title }}">
+					<span>{{ item.title }}</span>
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+</div>
+
+<!-- /.navbar-collapse -->

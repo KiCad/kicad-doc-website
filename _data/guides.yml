@@ -1,0 +1,14 @@
+- title: KiCad
+  url: /kicad/kicad.html
+  image: kicad.png
+  description: KiCad project launcher
+
+- title: Eeschema
+  url: /eeschema/eeschema.html
+  image: eeschema.png
+  description: Schematic Editor
+  
+- title: Pcbnew
+  url: /pcbnew/pcbnew.html
+  image: pcbnew.png
+  description: Board layout editor
