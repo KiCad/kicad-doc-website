@@ -6,12 +6,25 @@
 				<li>
 					<a href="/{{ page.lang }}{{ item.url }}">
 						<div class="book-box flex-container flex-column">
-							{% if item.image != blank %}
-							<img src="/img/program-icons/{{ item.image }}" />
+							{% if item.image != "" %}
+							<img src="/{{ item.image }}" />
 							{% endif %}
 							<div class="book-info">
 								<h2>{{ item.title }}</h2>
+								{%if item.description %}
 								<p>{{ item.description }}</p>
+								{% endif %}
+								{% if item.pdf != "" || item.epub != "" %}
+								<p>
+									<h6>Alternate formats</h6>
+									{% if item.pdf != "" %}
+										<a href="/{{ item.pdf }}"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</a>
+									{% endif %}
+									{% if item.epub != "" %}
+										<a href="/{{ item.epub }}"><i class="fa fa-file-o" aria-hidden="true"></i> EPUB</a>
+									{% endif %}
+								</p>
+								{% endif %}
 							</div>
 						</div>
 					</a>
