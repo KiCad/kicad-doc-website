@@ -1,0 +1,22 @@
+
+<div class="container" style="margin-top:100px">
+		<div class="row">
+			<ul class="books-list">
+				{% for item in site.data.generated_guides[page.lang] %}
+				<li>
+					<a href="/{{ page.lang }}{{ item.url }}">
+						<div class="book-box flex-container flex-column">
+							{% if item.image != blank %}
+							<img src="/img/program-icons/{{ item.image }}" />
+							{% endif %}
+							<div class="book-info">
+								<h2>{{ item.title }}</h2>
+								<p>{{ item.description }}</p>
+							</div>
+						</div>
+					</a>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>

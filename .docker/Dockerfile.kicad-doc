@@ -1,0 +1,11 @@
+FROM kicadeda/kicad-doc-builder-base:latest as build-env
+
+WORKDIR /src
+RUN git clone -b 5.0.0 https://github.com/KiCad/kicad-doc.git .
+
+RUN mkdir build && cd build 
+
+WORKDIR /src/build
+
+RUN cmake -DBUILD_FORMATS=pdf ../
+RUN make

@@ -1,11 +1,15 @@
 title: KiCad Docs
-description: The Jekyll AsciiDoc Quickstart project is a leg-up in starting your own website hosted on GitHub with content based in AsciiDoc.
+description: KiCad documentation
 exclude:
   - LICENSE.adoc
   - README.adoc
   - Gemfile
   - Gemfile.lock
   - Rakefile
+  - src/
+  - .docker/
+  - '*.rb'
+  - _templates
 asciidoc: {}
 asciidoctor:
   base_dir: :docdir
@@ -15,6 +19,7 @@ asciidoctor:
     - source-highlighter=coderay
     - icons=font
     - page-liquid
+    - toc!
 algolia:
   application_id: 'IHYFNWNX09'
   search_key: '06d4dede4a4f3991632cd8c15e5bf683'

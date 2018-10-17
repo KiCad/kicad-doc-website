@@ -1,26 +1,29 @@
 <!-- Collect the nav links, forms, and other content for toggling -->
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	<form class="navbar-form navbar-left">
-		<div class="form-group aa-input-container"  id="aa-input-container">
-			<input type="text" placeholder="Search" class="form-control search-input" id="aa-search-input" name="search" autocomplete="off">
-		</div>
-	</form>
-	<ul class="nav navbar-nav navbar-left">
+	<ul class="nav navbar-nav navbar-right">
 		<li class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Version<span class="caret"></span></a>
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">5.0 <span class="caret"></span></a>
 			<ul class="dropdown-menu">
 				<li><a href="/">5.0</a></li>
+				<li><a href="/">4.0</a></li>
 			</ul>
 		</li>
-	</ul>
-	<ul class="nav navbar-nav navbar-right">
-		{% for item in site.data.navigation %}
-			<li>
-				<a href="{{ item.url }}" alt="{{ item.title }}">
-					<span>{{ item.title }}</span>
-				</a>
-			</li>
-		{% endfor %}
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+				{{ site.data.generated_languages[page.lang].label }}
+
+				<span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu">
+				{% for item in site.data.generated_languages %}
+				<li>
+					<a href="/{{ item[0] }}" alt="{{ item[1].label }}">
+						<span>{{ item[1].label }}</span>
+					</a>
+				</li>
+				{% endfor %}
+			</ul>
+		</li>
 	</ul>
 </div>
 

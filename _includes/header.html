@@ -3,7 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{page.title}} | {{ site.title }}</title>
+    <title>
+        {% if page.title %}
+        {{page.title}} | {{ site.title }}
+        {% else %}
+        {{ site.title }}
+        {% endif %}
+    </title>
 
     <link href="/index.xml" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
     

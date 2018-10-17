@@ -1,24 +1,7 @@
 ---
 layout: home
 title: Home
+lang: en
 ---
 
-<div class="container">
-	<div class="row">
-		<ul class="books-list">
-			{% for item in site.data.guides %}
-			<li>
-				<a href="{{ item.url }}">
-					<div class="book-box flex-container flex-column">
-						<img src="/img/program-icons/{{ item.image }}" />
-						<div class="book-info">
-							<h2>{{ item.title }}</h2>
-							<p>{{ item.description }}</p>
-						</div>
-					</div>
-				</a>
-			</li>
-			{% endfor %}
-		</ul>
-	</div>
-</div>
+{% include index_book_list.html %}
