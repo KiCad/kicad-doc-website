@@ -54,7 +54,17 @@ def process_compiled_docs
 			end
 			
 			FileUtils.mkdir_p(File.join('./', langEntry, guideEntry)) unless Dir.exist?(File.join('./', langEntry, guideEntry))
-			FileUtils.cp_r(File.join('./src', guideEntry, langEntry)+'/.', File.join('./', langEntry, guideEntry))
+
+
+			guide_files = Dir.glob(File.join('./src', guideEntry, langEntry) + "/*").select{ |x| File.file? x }
+			guide_image_files = Dir.glob(File.join('./src', guideEntry, langEntry) + "/images/*").select{ |x| File.file? x }
+			guide_lang_image_files = Dir.glob(File.join('./src', guideEntry, langEntry) + "/images/"+langEntry+"/*").select{ |x| File.file? x }
+
+			FileUtils.cp(guide_files, File.join('./', langEntry, guideEntry))
+
+			FileUtils.mkdir_p(File.join('./', langEntry, guideEntry, 'images', langEntry))
+			FileUtils.cp(guide_image_files, File.join('./', langEntry, guideEntry, 'images'))
+			FileUtils.cp(guide_lang_image_files, File.join('./', langEntry, guideEntry, 'images', langEntry))
 
 			main_adoc_path = File.join('./', langEntry, guideEntry,guideEntry+'.adoc')
 			#time to mangle files!
