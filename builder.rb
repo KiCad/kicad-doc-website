@@ -58,12 +58,15 @@ def process_compiled_docs
 
 			guide_files = Dir.glob(File.join('./src', guideEntry, langEntry) + "/*").select{ |x| File.file? x }
 			guide_image_files = Dir.glob(File.join('./src', guideEntry, langEntry) + "/images/*").select{ |x| File.file? x }
+			guide_icon_files = Dir.glob(File.join('./src', guideEntry, langEntry) + "/images/icons/*").select{ |x| File.file? x }
 			guide_lang_image_files = Dir.glob(File.join('./src', guideEntry, langEntry) + "/images/"+langEntry+"/*").select{ |x| File.file? x }
 
 			FileUtils.cp(guide_files, File.join('./', langEntry, guideEntry))
 
 			FileUtils.mkdir_p(File.join('./', langEntry, guideEntry, 'images', langEntry))
+			FileUtils.mkdir_p(File.join('./', langEntry, guideEntry, 'images', 'icons'))
 			FileUtils.cp(guide_image_files, File.join('./', langEntry, guideEntry, 'images'))
+			FileUtils.cp(guide_icon_files, File.join('./', langEntry, guideEntry, 'images','icons'))
 			FileUtils.cp(guide_lang_image_files, File.join('./', langEntry, guideEntry, 'images', langEntry))
 
 			main_adoc_path = File.join('./', langEntry, guideEntry,guideEntry+'.adoc')
