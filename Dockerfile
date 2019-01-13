@@ -7,7 +7,7 @@ RUN mkdir build && cd build
 
 WORKDIR /src/build
 
-RUN cmake -DBUILD_FORMATS=pdf;epub ../
+RUN cmake -DBUILD_FORMATS="pdf;epub" ../
 RUN make
 
 ################################
