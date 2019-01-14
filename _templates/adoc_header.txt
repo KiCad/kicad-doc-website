@@ -2,4 +2,5 @@
 layout: default
 title: %%TITLE%%
 lang: %%LANG%%
+version: %%VERSION%%
 ---

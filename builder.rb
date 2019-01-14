@@ -22,6 +22,7 @@ def process_compiled_docs
 
 	guides = {}
 
+	version = '5.0.2'
 	Dir.foreach('./src') do |guideEntry|
 		next if skip_folders.include?guideEntry
 
@@ -72,7 +73,7 @@ def process_compiled_docs
 			main_adoc_path = File.join('./', langEntry, guideEntry,guideEntry+'.adoc')
 			#time to mangle files!
 
-			_update_main_adoc(main_adoc_path,doc.doctitle,langEntry)
+			_update_main_adoc(main_adoc_path,doc.doctitle,langEntry, version)
 
 			epub_path = File.join(langEntry, guideEntry,guideEntry+'.epub')
 			if !File.exist?(epub_path)
@@ -118,17 +119,30 @@ def process_compiled_docs
 
 	indexTemplate = File.read("_templates/index.html")
 	seenLangs.each do | lang |
-		langIndex = indexTemplate.gsub(/%%LANG%%/, lang)
-	
-		File.open(File.join("./", lang, "index.html"), "w") {|file| file.puts langIndex }
+		_write_index_file(File.join("./", lang, "index.html"), "Home", lang, version)
 	end
+
+	# Generate the main/true index which is really just the english one
+	_write_index_file("./index.html", "Home", "en", version)
 end
 
-def _update_main_adoc(adocPath, title, lang)
+def _write_index_file(path, title, lang, version)
+	indexTemplate = File.read("_templates/index.html")
+	
+	print "Writing index for " + lang + "\n"
+	langIndex = indexTemplate
+	langIndex = langIndex.gsub(/%%LANG%%/, lang)
+	langIndex = langIndex.gsub(/%%VERSION%%/, version)
+
+	File.open(path, "w") {|file| file.puts langIndex }
+end
+
+def _update_main_adoc(adocPath, title, lang, version)
 	
 	headerTemplate = File.read("_templates/adoc_header.txt")
 	headerTemplate = headerTemplate.gsub(/%%TITLE%%/, title)
 	headerTemplate = headerTemplate.gsub(/%%LANG%%/, lang)
+	headerTemplate = headerTemplate.gsub(/%%VERSION%%/, version)
 	Tempfile.open File.basename(adocPath) do |tempfile|
 		# prepend data to tempfile
 		tempfile << headerTemplate
