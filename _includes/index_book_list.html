@@ -2,7 +2,7 @@
 <div class="container" style="margin-top:100px">
 		<div class="row">
 			<ul class="books-list">
-				{% for item in site.data.generated_guides[page.lang] %}
+				{% for item in site.data.generated_guides[page.version][page.lang] %}
 				<li>
 					<a href="/{{ page.lang }}{{ item.url }}">
 						<div class="book-box flex-container flex-column">

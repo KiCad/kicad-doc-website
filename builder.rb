@@ -23,6 +23,11 @@ def process_compiled_docs
 	guides = {}
 
 	version = '5.0.2'
+	
+	if guides[version].nil?
+		guides[version] = {}
+	end
+
 	Dir.foreach('./src') do |guideEntry|
 		next if skip_folders.include?guideEntry
 
@@ -38,8 +43,8 @@ def process_compiled_docs
 
 			seenLangs.push(langEntry)
 
-			if guides[langEntry].nil?
-				guides[langEntry] = []
+			if guides[version][langEntry].nil?
+				guides[version][langEntry] = []
 			end
 
 			mainDocPath = File.join('./src', guideEntry, langEntry, guideEntry+'.adoc')
@@ -85,7 +90,7 @@ def process_compiled_docs
 				pdf_path = ''
 			end
 
-			guides[langEntry].push({
+			guides[version][langEntry].push({
 									"title" => doc.doctitle, 
 									"url" => "/%s/%s.html" % [guideEntry,guideEntry],
 									"image" => image_path,
