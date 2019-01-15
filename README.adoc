@@ -1,16 +1,19 @@
-KiCad Docs Website Source
-====================
+= KiCad Docs Website Source
+
 
 Docs website source for kicad :D
 
 
 == Prerequisites
 
+
 - Ruby 2.3 or higher
 - Bundle
 
 
 == Getting started
+
+=== Ruby deps
 After cloning the project, run
 
 ----
@@ -19,22 +22,34 @@ bundle install
 
 to download the required ruby packages.
 
-Basic development can then be done by 
+=== Kicad-doc source
 
 ----
-jekyll serve
+git clone https://github.com/KiCad/kicad-doc.git kicad-doc
 ----
 
+Build each required branch version as defined in _source/_data/versions.yml
+Take the entire resulting /build/ folder (literally the entire folder) and rename it to the <VERSION> folder here
 
-== Docs themselves
-The build process itself will automate retrieving the docs and staging them in the correct folders.
-For devleopment purposes, you will want to take the build output of the kicad-doc cmake process and put it into the 
-/src/ folder. i.e. take your /build/ folder from kicad-doc and put in the tree as /src/ here.
+./kicad-doc-built/<VERSION>/
 
-Then run
+
+NOTE: This needs to be automated later for "local development"
+
+
+=== Process the docs
+The "build" folder docs then need to be transformed and wrestled into their final form for the site.
+
+To do this just run
 
 ----
 rake process_files
 ----
 
-which will then do its thing taking the kicad-doc output and adjusting it for final inclusion in the website.
+
+=== Running the site in development
+Basic development can then be done by 
+
+----
+jekyll serve
+----
