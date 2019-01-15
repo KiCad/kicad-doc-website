@@ -16,3 +16,4 @@ generated_*.yml
 !/_source/fonts/*
 !/_source/img/*
 !/_source/js/*
+/kicad-doc-built

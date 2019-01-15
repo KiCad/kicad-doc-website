@@ -25,24 +25,25 @@ def process_compiled_docs
 	versionsDefined = YAML.load_file("_source/_data/versions.yml")
 
 	versionsDefined.each do |version, versionInfo|
-	
+		next if !File.directory? File.join('./kicad-doc-built', version)
+		
 		if guides[version].nil?
 			guides[version] = {}
 		end
 
 
-		Dir.foreach('./src') do |guideEntry|
+		Dir.foreach(File.join('./kicad-doc-built', version)) do |guideEntry|
 			next if skip_folders.include?guideEntry
 
-			next if !File.directory? File.join('./src', guideEntry)
+			next if !File.directory? File.join('./kicad-doc-built', version, guideEntry)
 			# do work on real items
 
 
 			print "Processing " + guideEntry + "\n"
 
-			Dir.foreach(File.join('./src', guideEntry)) do |langEntry|
+			Dir.foreach(File.join('./kicad-doc-built', version, guideEntry)) do |langEntry|
 				next if skip_folders.include?langEntry
-				next if !File.directory? File.join('./src', guideEntry, langEntry)
+				next if !File.directory? File.join('./kicad-doc-built', version, guideEntry, langEntry)
 
 				seenLangs.push(langEntry)
 
@@ -51,7 +52,7 @@ def process_compiled_docs
 				end
 
 				# this is the "index" adoc file that includes all of them
-				mainDocPath = File.join('./src', guideEntry, langEntry, guideEntry+'.adoc')
+				mainDocPath = File.join('./kicad-doc-built', version, guideEntry, langEntry, guideEntry+'.adoc')
 
 				#load the asciidoc file...to get the translated title mainly
 				doc = Asciidoctor.load_file mainDocPath
@@ -66,10 +67,10 @@ def process_compiled_docs
 				FileUtils.mkdir_p(File.join('./_source/', version,  langEntry, guideEntry)) unless Dir.exist?(File.join('./_source/', version, langEntry, guideEntry))
 
 
-				guide_files = Dir.glob(File.join('./src', guideEntry, langEntry) + "/*").select{ |x| File.file? x }
-				guide_image_files = Dir.glob(File.join('./src', guideEntry, langEntry) + "/images/*").select{ |x| File.file? x }
-				guide_icon_files = Dir.glob(File.join('./src', guideEntry, langEntry) + "/images/icons/*").select{ |x| File.file? x }
-				guide_lang_image_files = Dir.glob(File.join('./src', guideEntry, langEntry) + "/images/"+langEntry+"/*").select{ |x| File.file? x }
+				guide_files = Dir.glob(File.join('./kicad-doc-built', version, guideEntry, langEntry) + "/*").select{ |x| File.file? x }
+				guide_image_files = Dir.glob(File.join('./kicad-doc-built', version, guideEntry, langEntry) + "/images/*").select{ |x| File.file? x }
+				guide_icon_files = Dir.glob(File.join('./kicad-doc-built', version, guideEntry, langEntry) + "/images/icons/*").select{ |x| File.file? x }
+				guide_lang_image_files = Dir.glob(File.join('./kicad-doc-built', version, guideEntry, langEntry) + "/images/"+langEntry+"/*").select{ |x| File.file? x }
 
 				FileUtils.cp(guide_files, File.join('./_source/', version, langEntry, guideEntry))
 
