@@ -1,13 +1,18 @@
 FROM kicadeda/kicad-doc-builder-base:latest as doc-build-env
 
 WORKDIR /src
-RUN git clone -b 5.0.0 https://github.com/KiCad/kicad-doc.git .
+RUN git clone https://github.com/KiCad/kicad-doc.git .
 
-RUN mkdir build && cd build 
+RUN mkdir -p build/4.0.7
+RUN git checkout --force tags/4.0.7
+WORKDIR /src/build/4.0.7
+RUN cmake -DBUILD_FORMATS="pdf;epub" ../../
+RUN make
 
-WORKDIR /src/build
-
-RUN cmake -DBUILD_FORMATS="pdf;epub" ../
+RUN mkdir -p build/5.0.2
+RUN git checkout --force tags/5.0.2
+WORKDIR /src/build/5.0.2
+RUN cmake -DBUILD_FORMATS="pdf;epub" ../../
 RUN make
 
 ################################
@@ -23,7 +28,8 @@ RUN bundle install
 #copy the entire website folder into the build environment container
 COPY . .
 
-COPY --from=doc-build-env /src/build/src /site/src
+COPY --from=doc-build-env /src/build/4.0.7/src /site/kicad-doc-built/4.0.7
+COPY --from=doc-build-env /src/build/5.0.2/src /site/kicad-doc/built/5.0.2
 
 #actually build the site
 RUN rake process 
