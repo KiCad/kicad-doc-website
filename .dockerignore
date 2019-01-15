@@ -1,0 +1,6 @@
+.git
+.gitignore
+
+kicad-doc-built
+kicad-doc
+_site
