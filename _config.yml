@@ -1,5 +1,6 @@
 title: KiCad Docs
 description: KiCad documentation
+source: _source
 exclude:
   - LICENSE.adoc
   - README.adoc

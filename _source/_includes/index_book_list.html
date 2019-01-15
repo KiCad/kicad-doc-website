@@ -4,7 +4,7 @@
 			<ul class="books-list">
 				{% for item in site.data.generated_guides[page.version][page.lang] %}
 				<li>
-					<a href="/{{ page.lang }}{{ item.url }}">
+					<a href="/{{page.version}}/{{ page.lang }}{{ item.url }}">
 						<div class="book-box flex-container flex-column">
 							{% if item.image != "" %}
 							<img src="/{{ item.image }}" />
