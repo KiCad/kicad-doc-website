@@ -29,7 +29,7 @@ RUN bundle install
 COPY . .
 
 COPY --from=doc-build-env /src/build/4.0.7/src /site/kicad-doc-built/4.0.7
-COPY --from=doc-build-env /src/build/5.0.2/src /site/kicad-doc/built/5.0.2
+COPY --from=doc-build-env /src/build/5.0.2/src /site/kicad-doc-built/5.0.2
 
 #actually build the site
 RUN rake process 

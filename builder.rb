@@ -57,12 +57,6 @@ def process_compiled_docs
 				#load the asciidoc file...to get the translated title mainly
 				doc = Asciidoctor.load_file mainDocPath
 
-
-				image_path = File.join('img','guide-icons',guideEntry+'.png')
-
-				if !File.exist?(image_path)
-					image_path = ''
-				end
 				
 				FileUtils.mkdir_p(File.join('./_source/', version,  langEntry, guideEntry)) unless Dir.exist?(File.join('./_source/', version, langEntry, guideEntry))
 
@@ -85,13 +79,18 @@ def process_compiled_docs
 
 				_update_main_adoc(main_adoc_path,doc.doctitle,langEntry, version)
 
-				epub_path = File.join("./_source/", version, langEntry, guideEntry,guideEntry+'.epub')
-				if !File.exist?(epub_path)
+				image_path = File.join('img','guide-icons',guideEntry+'.png')
+				if !File.exist?(File.join("./_source/", image_path))
+					image_path = ''
+				end
+
+				epub_path = File.join(version, langEntry, guideEntry,guideEntry+'.epub')
+				if !File.exist?(File.join("./_source/", epub_path))
 					epub_path = ''
 				end
 
-				pdf_path = File.join("./_source/", version, langEntry, guideEntry,guideEntry+'.pdf')
-				if !File.exist?(pdf_path)
+				pdf_path = File.join(version, langEntry, guideEntry,guideEntry+'.pdf')
+				if !File.exist?(File.join("./_source/", pdf_path))
 					pdf_path = ''
 				end
 
