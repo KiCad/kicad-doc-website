@@ -5,6 +5,13 @@ require 'asciidoctor'
 require 'tempfile'
 
 class Builder
+
+	@pageLookup = {}
+
+	def initialize()
+		@pageLookup = {}
+	 end
+
 	def processCompiledDocs
 		skip_folders = [
 						'CMakeFiles',
@@ -78,33 +85,35 @@ class Builder
 					main_adoc_path = File.join('./_source/', version, langEntry, guideEntry,guideEntry+'.adoc')
 					#time to mangle files!
 
-					_update_main_adoc(main_adoc_path,doc.doctitle,langEntry, version)
+					baseUrl = "/%s/%s.html" % [guideEntry,guideEntry]
+					_updateMainAdoc(main_adoc_path,doc.doctitle,langEntry, version, baseUrl)
 
-
-					image_path = File.join('img','guide-icons',guideEntry+'.png')
+					image_path = File.join('/img','guide-icons',guideEntry+'.png')
 					if !File.exist?(File.join("./_source/", image_path))
 						image_path = ''
 					end
 
-					epub_path = File.join(version, langEntry, guideEntry,guideEntry+'.epub')
+					epub_path = File.join('/',version, langEntry, guideEntry,guideEntry+'.epub')
 					if !File.exist?(File.join("./_source/", epub_path))
 						epub_path = ''
 					end
 
-					pdf_path = File.join(version, langEntry, guideEntry,guideEntry+'.pdf')
+					pdf_path = File.join('/',version, langEntry, guideEntry,guideEntry+'.pdf')
 					if !File.exist?(File.join("./_source/", pdf_path))
 						pdf_path = ''
 					end
 
+					expectedUrl = "/%s/%s/%s/%s.html" % [version, langEntry, guideEntry,guideEntry]
 					guides[version][langEntry].push({
 											"title" => doc.doctitle, 
-											"url" => "/%s/%s.html" % [guideEntry,guideEntry],
+											"url" => expectedUrl,
 											"image" => image_path,
 											"description" => "",
 											"pdf" => pdf_path,
 											"epub" => epub_path
 											})
-					
+
+					_addToPageIndex(baseUrl, langEntry, version)
 				end
 			end
 			File.open("_source/_data/generated_guides.yml", "w") { |file| file.write(guides.to_yaml) }
@@ -140,26 +149,51 @@ class Builder
 
 		# Generate the main/true index which is really just the english one
 		_write_index_file("./_source/index.html", "Home", "en", "5.0.2")
+
+		
+		File.open("_source/_data/page_index.yml", "w") { |file| file.write(@pageLookup.to_yaml) }
 	end
 
+
+	def _addToPageIndex(path, lang, version)
+		if @pageLookup[path].nil?
+			@pageLookup[path] = {
+				'versionIndex' => {},
+				'langIndex' => {}
+			}
+		end
+		
+		if @pageLookup[path]['versionIndex'][version].nil?
+			@pageLookup[path]['versionIndex'][version] = []
+		end
+
+		@pageLookup[path]['versionIndex'][version].push(lang)
+		
+		if @pageLookup[path]['langIndex'][lang].nil?
+			@pageLookup[path]['langIndex'][lang] = []
+		end
+
+		@pageLookup[path]['langIndex'][lang].push(version)
+	end
 
 	def _write_index_file(path, title, lang, version)
 		indexTemplate = File.read("_source/_templates/index.html")
 		
 		print "Writing index for " + lang + "\n"
-		langIndex = indexTemplate
-		langIndex = langIndex.gsub(/%%LANG%%/, lang)
-		langIndex = langIndex.gsub(/%%VERSION%%/, version)
+		indexPage = indexTemplate
+		indexPage = indexPage.gsub(/%%LANG%%/, lang)
+		indexPage = indexPage.gsub(/%%VERSION%%/, version)
 
 		File.open(path, "w") {|file| file.puts langIndex }
 	end
 
-	def _update_main_adoc(adocPath, title, lang, version)
+	def _updateMainAdoc(adocPath, title, lang, version, baseurl)
 		
 		headerTemplate = File.read("_source/_templates/adoc_header.txt")
 		headerTemplate = headerTemplate.gsub(/%%TITLE%%/, title)
 		headerTemplate = headerTemplate.gsub(/%%LANG%%/, lang)
 		headerTemplate = headerTemplate.gsub(/%%VERSION%%/, version)
+		headerTemplate = headerTemplate.gsub(/%%BASEURL%%/, baseurl)
 		Tempfile.open File.basename(adocPath) do |tempfile|
 			# prepend data to tempfile
 			tempfile << headerTemplate

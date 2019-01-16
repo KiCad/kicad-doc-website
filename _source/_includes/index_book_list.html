@@ -4,10 +4,10 @@
 			<ul class="books-list">
 				{% for item in site.data.generated_guides[page.version][page.lang] %}
 				<li>
-					<a href="/{{page.version}}/{{ page.lang }}{{ item.url }}">
+					<a href="{{ item.url }}">
 						<div class="book-box flex-container flex-column">
 							{% if item.image != "" %}
-							<img src="/{{ item.image }}" />
+							<img src="{{ item.image }}" />
 							{% endif %}
 							<div class="book-info">
 								<h2>{{ item.title }}</h2>
@@ -18,10 +18,10 @@
 								<p>
 									<h6>Alternate formats</h6>
 									{% if item.pdf != "" %}
-										<a href="/{{ item.pdf }}"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</a>
+										<a href="{{ item.pdf }}"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</a>
 									{% endif %}
 									{% if item.epub != "" %}
-										<a href="/{{ item.epub }}"><i class="fa fa-file-o" aria-hidden="true"></i> EPUB</a>
+										<a href="{{ item.epub }}"><i class="fa fa-file-o" aria-hidden="true"></i> EPUB</a>
 									{% endif %}
 								</p>
 								{% endif %}

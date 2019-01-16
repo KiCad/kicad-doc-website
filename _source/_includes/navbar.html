@@ -7,13 +7,25 @@
 				<span class="caret"></span>
 			</a>
 			<ul class="dropdown-menu">
-				{% for item in site.data.versions %}
-				<li>
-					<a href="/{{ item[0] }}" alt="{{ item[1].label }}">
-						<span>{{ item[1].label }}</span>
-					</a>
-				</li>
-				{% endfor %}
+				{% if page.baseUrl != nil && site.data.page_index[page.baseUrl] != nil %}
+					{% if site.data.page_index[page.baseUrl]['langIndex'][page.lang] != nil %}
+						{% for item in site.data.page_index[page.baseUrl]['langIndex'][page.lang] %}
+						<li>
+							<a href="/{{ item }}/{{page.lang}}/{{page.baseUrl}}">
+								<span>{{ site.data.versions[item].label }}</span>
+							</a>
+						</li>
+						{% endfor %}
+					{% endif %}
+				{% else %}
+					{% for item in site.data.versions %}
+					<li>
+						<a href="/{{ item[0] }}" alt="{{ item[1].label }}">
+							<span>{{ item[1].label }}</span>
+						</a>
+					</li>
+					{% endfor %}
+				{% endif %}
 			</ul>
 		</li>
 		<li class="dropdown">
@@ -23,13 +35,25 @@
 				<span class="caret"></span>
 			</a>
 			<ul class="dropdown-menu">
-				{% for item in site.data.generated_languages %}
-				<li>
-					<a href="/{{ item[0] }}" alt="{{ item[1].label }}">
-						<span>{{ item[1].label }}</span>
-					</a>
-				</li>
-				{% endfor %}
+				{% if page.baseUrl != nil && site.data.page_index[page.baseUrl] != nil %}
+					{% if site.data.page_index[page.baseUrl]['versionIndex'][page.version] != nil %}
+						{% for item in site.data.page_index[page.baseUrl]['versionIndex'][page.version] %}
+						<li>
+							<a href="/{{ page.version }}/{{item}}/{{page.baseUrl}}">
+								<span>{{ site.data.language_definitions[item].label }}</span>
+							</a>
+						</li>
+						{% endfor %}
+					{% endif %}
+				{% else %}
+					{% for item in site.data.generated_languages %}
+					<li>
+						<a href="/{{ item[0] }}" alt="{{ item[1].label }}">
+							<span>{{ item[1].label }}</span>
+						</a>
+					</li>
+					{% endfor %}
+				{% endif %}
 			</ul>
 		</li>
 	</ul>

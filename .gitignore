@@ -17,3 +17,4 @@ generated_*.yml
 !/_source/img/*
 !/_source/js/*
 /kicad-doc-built
+/kicad-doc
