@@ -1,5 +1,6 @@
-require './builder.rb'
+require './lib/Builder'
 
 task :process do
-	process_compiled_docs
+	builder = Builder.new
+	builder.processCompiledDocs
 end
