@@ -184,7 +184,7 @@ class Builder
 		indexPage = indexPage.gsub(/%%LANG%%/, lang)
 		indexPage = indexPage.gsub(/%%VERSION%%/, version)
 
-		File.open(path, "w") {|file| file.puts langIndex }
+		File.open(path, "w") {|file| file.puts indexPage }
 	end
 
 	def _updateMainAdoc(adocPath, title, lang, version, baseurl)

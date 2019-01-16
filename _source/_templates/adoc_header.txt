@@ -4,4 +4,5 @@ title: %%TITLE%%
 lang: %%LANG%%
 version: %%VERSION%%
 baseUrl: %%BASEURL%%
+isGuide: true
 ---

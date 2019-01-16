@@ -1,6 +1,23 @@
 <!-- Collect the nav links, forms, and other content for toggling -->
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	<ul class="nav navbar-nav navbar-right">
+		{% if page.isGuide %}
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+				{{ page.title }}
+				<span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu">
+					{% for item in site.data.generated_guides[page.version][page.lang] %}
+					<li>
+						<a href="{{ item.url }}">
+							<span>{{ item.title }}</span>
+						</a>
+					</li>
+					{% endfor %}
+			</ul>
+		</li>
+		{% endif %}
 		<li class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 				{{ site.data.versions[page.version].label }}
