@@ -65,7 +65,7 @@
 				{% else %}
 					{% for item in site.data.generated_languages %}
 					<li>
-						<a href="/{{ item[0] }}" alt="{{ item[1].label }}">
+						<a href="/{{page.version}}/{{ item[0] }}" alt="{{ item[1].label }}">
 							<span>{{ item[1].label }}</span>
 						</a>
 					</li>
