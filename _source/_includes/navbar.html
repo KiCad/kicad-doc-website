@@ -28,7 +28,7 @@
 					{% if site.data.page_index[page.baseUrl]['langIndex'][page.lang] != nil %}
 						{% for item in site.data.page_index[page.baseUrl]['langIndex'][page.lang] %}
 						<li>
-							<a href="/{{ item }}/{{page.lang}}/{{page.baseUrl}}">
+							<a href="/{{ item }}/{{page.lang}}{{page.baseUrl}}">
 								<span>{{ site.data.versions[item].label }}</span>
 							</a>
 						</li>
@@ -56,7 +56,7 @@
 					{% if site.data.page_index[page.baseUrl]['versionIndex'][page.version] != nil %}
 						{% for item in site.data.page_index[page.baseUrl]['versionIndex'][page.version] %}
 						<li>
-							<a href="/{{ page.version }}/{{item}}/{{page.baseUrl}}">
+							<a href="/{{ page.version }}/{{item}}{{page.baseUrl}}">
 								<span>{{ site.data.language_definitions[item].label }}</span>
 							</a>
 						</li>
