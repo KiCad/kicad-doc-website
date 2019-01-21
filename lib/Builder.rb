@@ -32,6 +32,18 @@ class Builder
 
 		versionsDefined = YAML.load_file("_source/_data/versions.yml")
 
+		# preprocess to validate default
+		defaultVersion = nil
+		versionsDefined.each do |version, versionInfo|
+			if versionInfo['default']
+				if defaultVersion.nil?
+					defaultVersion = version
+				else
+					abort 'More than one default version found in the versions.yml! Only set default: true on one of them!'
+				end
+			end
+		end
+		
 		versionsDefined.each do |version, versionInfo|
 			next if !File.directory? File.join('./kicad-doc-built', version)
 			
@@ -148,7 +160,7 @@ class Builder
 		end
 
 		# Generate the main/true index which is really just the english one
-		_write_index_file("./_source/index.html", "Home", "en", "5.0.2")
+		_write_index_file("./_source/index.html", "Home", "en", defaultVersion)
 
 		
 		File.open("_source/_data/page_index.yml", "w") { |file| file.write(@pageLookup.to_yaml) }

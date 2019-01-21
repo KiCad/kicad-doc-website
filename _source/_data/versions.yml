@@ -1,4 +1,9 @@
+# The key must be the "tag" for the version, it's used to key everything from urls to extract the raw docs
+# 'label' is what is rendered visually to the end user
+# 'default' must only be set true for one version and sets the version for the plain / url
 '4.0.7':
   label: 4.0.7
+  default: false
 '5.0.2':
   label: 5.0.2
+  default: true
