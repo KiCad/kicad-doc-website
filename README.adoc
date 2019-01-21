@@ -18,7 +18,7 @@ After cloning the project, run
 
 ----
 bundle install
----- 
+----
 
 to download the required ruby packages.
 
@@ -48,8 +48,28 @@ rake process_files
 
 
 === Running the site in development
-Basic development can then be done by 
+Basic development can then be done by
 
 ----
 jekyll serve
+----
+
+=== Running the complete site container
+Local verification of the container for the pod can be tested by
+building it, for exmaple with:
+
+----
+docker build -t kicadeda/kicad-docs-website .
+----
+
+And then it can be served locally by
+
+----
+docker run --rm -p 8081:8081 kicadeda/kicad-docs-website
+----
+
+To debug or inspect the stuff included in the image use
+
+----
+docker run --rm --entrypoint=ash -it kicadeda/kicad-docs-website
 ----
