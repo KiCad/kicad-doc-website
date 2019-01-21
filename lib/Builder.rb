@@ -102,7 +102,7 @@ class Builder
 
 					image_path = File.join('/img','guide-icons',guideEntry+'.png')
 					if !File.exist?(File.join("./_source/", image_path))
-						image_path = ''
+						image_path = '/img/guide-icons/placeholder.png'
 					end
 
 					epub_path = File.join('/',version, langEntry, guideEntry,guideEntry+'.epub')
