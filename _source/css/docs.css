@@ -49,6 +49,7 @@
 }
 .books-list li .book-box h2 {
     border-bottom: 1px solid #e5e5e5;
+    font-size: 22px;
 }
 .books-list li h2 {
     text-align: center;
