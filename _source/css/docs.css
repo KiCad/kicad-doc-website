@@ -120,8 +120,9 @@
 }
 
 .imageblock img {
-    /* forces images to fit within the main div.... */
-    width: 100%;
+    /* forces images to fit within the main div while not rescaling */
+    width: auto;
+    max-width: 100%;
 }
 
 .page-header-decor {
