@@ -22,17 +22,6 @@ asciidoctor:
     - icons=font
     - page-liquid
     - toc!
-algolia:
-  application_id: 'IHYFNWNX09'
-  search_key: '06d4dede4a4f3991632cd8c15e5bf683'
-  index_name: '5.0'
-  extensions_to_index:
-    - html
-    - md
-    - adoc
-  files_to_exclude:
-    #shitty attempt at skipping the subpages so only the master include gets pulled in
-    - '**/*_*.adoc'
 
 footer:
   forum_url: https://forum.kicad.info/
