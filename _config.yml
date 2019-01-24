@@ -33,3 +33,7 @@ algolia:
   files_to_exclude:
     #shitty attempt at skipping the subpages so only the master include gets pulled in
     - '**/*_*.adoc'
+
+footer:
+  forum_url: https://forum.kicad.info/
+  github_url: https://github.com/kicad
