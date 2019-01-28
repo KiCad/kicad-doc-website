@@ -31,6 +31,7 @@ class Builder
 		guides = {}
 
 		versionsDefined = YAML.load_file("_source/_data/versions.yml")
+		guidePriorities = YAML.load_file("_source/_data/guide_priority.yml")
 
 		# preprocess to validate default
 		defaultVersion = nil
@@ -115,6 +116,12 @@ class Builder
 						pdf_path = ''
 					end
 
+
+					priority = guidePriorities.index(guideEntry)
+					if priority.nil?
+						priority = 99
+					end
+
 					expectedUrl = "/%s/%s/%s/%s.html" % [version, langEntry, guideEntry,guideEntry]
 					guides[version][langEntry].push({
 											"title" => doc.doctitle, 
@@ -122,7 +129,8 @@ class Builder
 											"image" => image_path,
 											"description" => "",
 											"pdf" => pdf_path,
-											"epub" => epub_path
+											"epub" => epub_path,
+											"priority" => priority
 											})
 
 					_addToPageIndex(baseUrl, langEntry, version)
