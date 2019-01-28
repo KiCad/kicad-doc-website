@@ -1,0 +1,10 @@
+# KiCad **DOC WEBBSITE** issue guidance.
+
+Thanks for opening an issue. We accept both suggestions and bugs :D
+
+This issue tracker is **ONLY** used for issues/suggestions with the KiCad **DOC WEBSITE**. This does not include the actual documentation content as this website is simply
+a wrapper around the real documentation repository.
+
+KiCad documentation content related issues should go here: [kicad-doc](https://github.com/KiCad/kicad-doc)
+KiCad application related issues should go here: [launchpad](https://bugs.launchpad.net/kicad)
+KiCad website (the not docs portion) related issues should go here: [kicad-website](https://github.com/KiCad/kicad-website)
