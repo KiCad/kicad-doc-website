@@ -15,7 +15,7 @@ COPY --from=index.docker.io/kicadeda/kicad-doc:4.0.7 /src /site/kicad-doc-built/
 COPY --from=index.docker.io/kicadeda/kicad-doc:5.0.2 /src /site/kicad-doc-built/5.0.2
 
 #actually build the site
-RUN rake process 
+RUN rake process
 
 RUN jekyll build
 
