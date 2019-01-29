@@ -7,3 +7,6 @@
 '5.0.2':
   label: 5.0.2
   default: true
+'master':
+  label: master
+  default: false
