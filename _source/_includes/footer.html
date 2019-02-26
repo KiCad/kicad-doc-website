@@ -43,11 +43,12 @@
 
     <!-- at the end of the BODY -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+    
     <script type="text/javascript"> docsearch({
     apiKey: 'c3bb1e95e328780b7f8624c691fbea24',
     indexName: 'kicad',
     inputSelector: '#doc-search-input',
-    algoliaOptions: { 'facetFilters': ["version:$VERSION", "language:$LANGUAGE"] },
+    algoliaOptions: { 'facetFilters': ["version:{{ page.version }}", "language:{{ page.lang }}"] },
     debug: false // Set debug to true if you want to inspect the dropdown
     });
     </script>
