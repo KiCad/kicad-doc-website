@@ -64,12 +64,11 @@
 }
 
 .navbar-form {
-    margin-top: 8px;
+    margin-top: 12px;
 }
 
-.search-input {
-    width: 250px !important;
-    height: 42px;
+.navbar-form input {
+    width:300px !important;
 }
 
 @media (min-width: 1601px) {

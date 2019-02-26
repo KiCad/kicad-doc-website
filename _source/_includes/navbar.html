@@ -1,5 +1,13 @@
 <!-- Collect the nav links, forms, and other content for toggling -->
-<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<div class="collapse navbar-collapse">
+	<div class="col-sm-3 col-md-3">
+		<form class="navbar-form" role="search" onsubmit="return false;">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Search" id='doc-search-input' name="q">
+			</div>
+		</form>
+	</div>
+
 	<ul class="nav navbar-nav navbar-right">
 		{% if page.isGuide %}
 		<li class="dropdown">
