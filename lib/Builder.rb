@@ -32,6 +32,7 @@ class Builder
 
 		versionsDefined = YAML.load_file("_source/_data/versions.yml")
 		guidePriorities = YAML.load_file("_source/_data/guide_priority.yml")
+		langDefinitions = YAML.load_file("_source/_data/language_definitions.yml")
 
 		# preprocess to validate default
 		defaultVersion = nil
@@ -46,13 +47,14 @@ class Builder
 		end
 		
 		versionsDefined.each do |version, versionInfo|
+			print "Processing version " + version + "\n"
 			next if !File.directory? File.join('./kicad-doc-built', version)
 			
 			if guides[version].nil?
 				guides[version] = {}
 			end
 
-
+			seenLangs = []
 			Dir.foreach(File.join('./kicad-doc-built', version)) do |guideEntry|
 				next if skip_folders.include?guideEntry
 
@@ -143,7 +145,6 @@ class Builder
 			# seems silly but hey, just in case one disappears or appears, we need a friendly translation for the dropdown
 			# and this enforces we have one
 			seenLangs = seenLangs.uniq
-			langDefinitions = YAML.load_file("_source/_data/language_definitions.yml")
 			outputLangHash = {}
 
 			langDefinitions.each do | lang, definition | 
@@ -160,6 +161,7 @@ class Builder
 			indexTemplate = File.read("_source/_templates/index.html")
 			seenLangs.each do | lang |
 				#write the language specific index
+
 				_write_index_file(File.join("./_source/", version, lang, "index.html"), "Home", lang, version)
 			end
 			
