@@ -13,6 +13,7 @@ COPY . .
 
 COPY --from=index.docker.io/kicadeda/kicad-doc:4.0.7 /src /site/kicad-doc-built/4.0.7
 COPY --from=index.docker.io/kicadeda/kicad-doc:5.0.2 /src /site/kicad-doc-built/5.0.2
+COPY --from=index.docker.io/kicadeda/kicad-doc:5.1.0 /src /site/kicad-doc-built/5.1.0
 COPY --from=index.docker.io/kicadeda/kicad-doc:master /src /site/kicad-doc-built/master
 
 #actually build the site
