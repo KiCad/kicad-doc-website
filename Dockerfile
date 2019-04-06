@@ -28,6 +28,7 @@ FROM nginx:alpine
 
 #copy over the site config for nginx
 COPY ./.docker/default.conf /etc/nginx/conf.d/default.conf
+COPY ./.docker/kicad-downloads-proxy-pass.conf /etc/nginx/conf.d/kicad-downloads-proxy-pass.conf
 
 #copy over the built website from the build environment docker
 COPY --from=site-build-env /site/_site /usr/share/nginx/html
