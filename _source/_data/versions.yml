@@ -9,6 +9,9 @@
   default: false
 '5.1.0':
   label: 5.1.0
+  default: false
+'5.1.1':
+  label: 5.1.1
   default: true
 'master':
   label: master
