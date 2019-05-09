@@ -33,6 +33,10 @@ COPY ./.docker/kicad-downloads-proxy-pass.conf /etc/nginx/conf.d/kicad-downloads
 #copy over the built website from the build environment docker
 COPY --from=site-build-env /site/_site /usr/share/nginx/html
 
+#copy the doxygen docs
+COPY --from=index.docker.io/kicadeda/kicad-doc-doxygen:master /doxygen-docs_html /usr/share/nginx/html/doxygen
+COPY --from=index.docker.io/kicadeda/kicad-doc-doxygen:master /doxygen-python_html /usr/share/nginx/html/doxygen-python
+
 # change permissions to allow running as arbitrary user
 RUN chmod -R 777 /var/log/nginx /var/cache/nginx /var/run \
      && chgrp -R 0 /etc/nginx \
