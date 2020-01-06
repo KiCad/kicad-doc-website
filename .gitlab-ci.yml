@@ -1,11 +1,11 @@
 image: docker:19.03.1
+services:
+  - docker:19.03.1-dind
 
 before_script:
   - docker info
 
 build:
-  services:
-    - docker:19.03.1-dind
   stage: build
   script:
     - docker build -t test_tag .
