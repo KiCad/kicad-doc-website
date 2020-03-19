@@ -2,10 +2,15 @@ image: docker:19.03.1
 services:
   - docker:19.03.1-dind
 
+variables:
+    BASE_TAG: ${CI_REGISTRY}/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}/${CI_COMMIT_REF_SLUG}
+
 before_script:
   - docker info
 
 build:
   stage: build
   script:
-    - docker build -t test_tag .
+    - docker build -t ${BASE_TAG} .
+    - docker push ${BASE_TAG}/${DISTRO}:${VER}
+
