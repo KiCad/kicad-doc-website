@@ -1,7 +1,7 @@
 FROM kicad/builder:archlinux-builder as build-doxygen-env
 USER root
 WORKDIR /src
-RUN git clone https://github.com/KiCad/kicad-source-mirror.git .
+RUN git clone https://gitlab.com/kicad/code/kicad.git .
 
 RUN ls
 RUN mkdir build && cd build
