@@ -7,10 +7,28 @@ variables:
 
 before_script:
   - docker info
+  - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
 
 build:
   stage: build
   script:
     - docker build -t ${BASE_TAG} .
     - docker push ${BASE_TAG}/${DISTRO}:${VER}
+
+
+development:
+  stage: deploy
+  script:
+    - docker build -t "$CI_REGISTRY_IMAGE:latest" .
+    - docker push "$CI_REGISTRY_IMAGE:latest"
+  only:
+    - master
+
+stable:
+  stage: deploy
+  script:
+    - docker build -t "$CI_REGISTRY_IMAGE:$(CI_BUILD_REF_NAME)" .
+    - docker push "$CI_REGISTRY_IMAGE:$(CI_BUILD_REF_NAME)"
+  only:
+    - tags
 
