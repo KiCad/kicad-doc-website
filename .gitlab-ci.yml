@@ -9,11 +9,22 @@ before_script:
   - docker info
   - docker login -u gitlab-ci-token -p "$CI_BUILD_TOKEN" "$CI_REGISTRY"
 
-development:
-  stage: build
+stages:
+  - build
+  - deploy
+
+docs_website:
+  stage: deploy
   script:
     - docker build -t "$CI_REGISTRY_IMAGE:latest" .
     - docker push "$CI_REGISTRY_IMAGE:latest"
   only:
     - master
 
+doxygen_docs:
+  stage: build
+  script:
+    - docker build -t "$CI_REGISTRY_IMAGE/kicad-doxygen:master" -f .docker/Dockerfile.kicad-doc-doxygen .
+    - docker push "$CI_REGISTRY_IMAGE/kicad-doxygen:master"
+  only:
+    - schedules
