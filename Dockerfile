@@ -14,7 +14,7 @@ COPY . .
 COPY --from=index.docker.io/kicadeda/kicad-doc:4.0.7 /src /site/kicad-doc-built/4.0.7
 COPY --from=index.docker.io/kicadeda/kicad-doc:5.0.2 /src /site/kicad-doc-built/5.0.2
 COPY --from=index.docker.io/kicadeda/kicad-doc:5.1.5 /src /site/kicad-doc-built/5.1.5
-COPY --from=index.docker.io/kicadeda/kicad-doc:master /src /site/kicad-doc-built/master
+COPY --from=registry.gitlab.com/kicad/services/kicad-doc:master /src /site/kicad-doc-built/master
 
 #actually build the site
 RUN rake process
