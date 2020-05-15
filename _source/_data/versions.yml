@@ -7,8 +7,8 @@
 '5.0.2':
   label: 5.0.2
   default: false
-'5.1.5':
-  label: 5.1.5
+'5.1.6':
+  label: 5.1.6
   default: true
 'master':
   label: master
